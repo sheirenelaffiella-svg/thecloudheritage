@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CLOUD HERITAGE | Full Interactive AU</title>
+    <style>
+        :root {
+            --bg-color: #08080a;
+            --terminal-green: #00ff66;
+            --accent-red: #ff3333;
+            --panel-bg: #121218;
+            --text-main: #e0e0e0;
+            --text-muted: #888899;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--panel-bg);
+            border: 1px solid #222233;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.08);
+        }
+
+        .header {
+            border-bottom: 1px solid #222233;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 0.95rem;
+            color: var(--terminal-green);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .status {
+            font-size: 0.75rem;
+            color: var(--accent-red);
+        }
+
+        /* Screen Sections */
+        .story-section {
+            display: none;
+            background: #0d0d12;
+            border: 1px solid #1a1a26;
+            border-radius: 6px;
+            padding: 15px;
+            height: 320px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .story-section.active {
+            display: flex;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .chat-message.incoming {
+            background: #1a1a26;
+            align-self: flex-start;
+            border-left: 3px solid var(--terminal-green);
+        }
+
+        .chat-message.outgoing {
+            background: #1f2a22;
+            align-self: flex-end;
+            border-right: 3px solid var(--terminal-green);
+        }
+
+        .chat-message.system {
+            background: #221a1a;
+            align-self: center;
+            border: 1px dashed var(--accent-red);
+            color: #ff9999;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .sender {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background: #161622;
+            border: 1px solid #33334d;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .control-panel p {
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .input-box {
+            background: #0a0a0c;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            padding: 8px;
+            text-align: center;
+            width: 180px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .btn-action {
+            background: var(--terminal-green);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .btn-action:hover {
+            background: #00cc52;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>[THE CLOUD HERITAGE - CORTIS AU]</h1>
+            <span class="status" id="systemStatus">● SYSTEM ACTIVE</span>
+        </div>
+
+        <!-- PART 1 -->
+        <div class="story-section active" id="part1">
+            <div class="chat-message system">PART 1: Inisialisasi Sistem & Backup Pulih</div>
+            <div class="chat-message incoming">
+                <span class="sender">Unknown Number</span>
+                Eh Marvin, lo udah ngelakuin apa yang gw suruh kemarin kan?
+            </div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden</span>
+                Salah sambung, Mas. Ini bukan Marvin. Saya beli HP ini dari toko Julian kemarin.
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Julian</span>
+                ...<br>Ah, sial. Jangan buka-buka isi file di dalam HP itu. Tolong balikin ke Julian atau kasih ke saya sekarang!
+            </div>
+        </div>
+
+        <!-- PART 2 -->
+        <div class="story-section" id="part2">
+            <div class="chat-message system">PART 2: Arsip Terkunci</div>
+            <div class="chat-message incoming">
+                <span class="sender">Julian</span>
+                Jangan di-ulik! Itu data pribadi. Nanti saya beli balik HP itu dua kali lipat harganya!
+            </div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden (ke Kevin)</span>
+                Kev, orangnya panik banget pas gua bilang beli di toko Julian. Penasaran gua, coba gua buka folder terkunci pakai sandi dokumen...
+            </div>
+            <div class="chat-message system">
+                > ACCESS GRANTED (PIN: 180825)<br>
+                > File Loaded: Loker_Stasiun.zip<br>
+                > "Julian & Sean minta jatah 60%, tapi gua tahu mereka mau curangi gua..."
+            </div>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="story-section" id="part3">
+            <div class="chat-message system">PART 3: Teror GPS Real-Time</div>
+            <div class="chat-message incoming">
+                <span class="sender">SISTEM PERINGATAN (Find My Device)</span>
+                ⚠️ Perhatian: Lokasi Anda sedang dilacak secara Real-Time oleh perangkat eksternal terhubung!
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Julian</span>
+                Mas Jayden, kamu lagi di dalam kosan ya? Saya ada di depan gang, mau ambil HP temen saya baik-baik.
+            </div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden</span>
+                Anjir... dia tahu posisi kosan gua secara real-time! Kevin, gua harus kabur sekarang!
+            </div>
+        </div>
+
+        <!-- PART 4 -->
+        <div class="story-section" id="part4">
+            <div class="chat-message system">PART 4: Pengakuan Rekan Kejahatan</div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden (ke Julian)</span>
+                Mas Julian tau saya beli HP ini dari Mas Sean (pemilik konter) kan? Kalian sengaja jebak saya?!
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Julian</span>
+                Hahaha, pintar juga lo. Sean itu emang sengaja jual HP itu ke lu biar kalau ada apa-apa, polisi nyangkanya lu pelakunya. Gua cuma mau kunci loker stasiun berisi uang itu!
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Julian</span>
+                Lu gak usah sok pahlawan, Jayden. Marvin itu udah gak ada di dunia ini!
+            </div>
+        </div>
+
+        <!-- PART 5 -->
+        <div class="story-section" id="part5">
+            <div class="chat-message system">PART 5: Suara dari Masa Lalu (Twist 1)</div>
+            <div class="chat-message incoming">
+                <span class="sender">Kevin (Membuka Audio Tersembunyi)</span>
+                Jim, dengar Voice Note dari Marvin ini!
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Voice Note (Marvin)</span>
+                "Julian, Sean, kalian pikir kalian bisa bohongi gua? Uang hasil pemerasan ini udah gua kunci di Loker Stasiun. Kodenya cuma ada di HP gua. Gua cabut ke luar negeri malam ini."
+            </div>
+            <div class="chat-message system">
+                > FAKTA TERUNGKAP: Marvin tidak pernah dibunuh! Dia sengaja memalsukan kehilangannya dan kabur ke luar negeri. Julian & Sean murni mengejar sisa harta di loker!
+            </div>
+        </div>
+
+        <!-- PART 6 -->
+        <div class="story-section" id="part6">
+            <div class="chat-message system">PART 6: Perangkap di Kafe</div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden (ke Sean)</span>
+                Mas Sean, saya tahu isi HP ini. Ketemuan di kafe ramai malam ini jam 8. Bawa Julian, atau saya sebar dokumen ini ke polisi.
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Sean</span>
+                Ck. Oke, jangan macem-macem ya. Kita datang berdua.
+            </div>
+            <div class="chat-message system">
+                > STRATEGI JAYDEN: Jayden sudah mendatangi loker stasiun lebih dulu dan mengamankan isinya, lalu menyiapkan jebakan bersama Kevin.
+            </div>
+        </div>
+
+        <!-- PART 7 -->
+        <div class="story-section" id="part7">
+            <div class="chat-message system">PART 7: Konfrontasi & Klimaks</div>
+            <div class="chat-message incoming">
+                <span class="sender">Julian (di Kafe)</span>
+                Pilihan bagus, Jayden. Mana HP-nya? Cepat ketik PIN lokernya.
+            </div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden</span>
+                Silakan masukkan sendiri kodenya, Mas.
+            </div>
+            <div class="chat-message system">
+                > HASIL SISTEM: [KODE SALAH / LOKER KOSONG]<br>
+                > Sean & Julian panik. Seketika polisi menyergap meja mereka berkat live audio streaming dari HP Kevin!
+            </div>
+        </div>
+
+        <!-- PART 8 -->
+        <div class="story-section" id="part8">
+            <div class="chat-message system">PART 8: THE UNTHINKABLE PLOT TWIST (TAMAT)</div>
+            <div class="chat-message incoming">
+                <span class="sender">Kevin (Chat Pribadi ke Jayden)</span>
+                Sorry ya Jayden... gua harus pake cara ini buat jebak Julian & Sean supaya nama kakak gua bersih.
+            </div>
+            <div class="chat-message outgoing">
+                <span class="sender">Jayden</span>
+                Tunggu... Maksud lo, **Marvin** itu...
+            </div>
+            <div class="chat-message incoming">
+                <span class="sender">Kevin</span>
+                Iya. Marvin itu **kakak kandung gua**. Gua sengaja arahin lo beli HP itu di konter Sean biar lo yang bongkar semuanya tanpa gua kena imbasnya. Thanks bro.
+            </div>
+            <div class="chat-message system">
+                > TAMAT. Julian & Sean dipenjara. Harta kembali ke keluarga Marvin. Jayden pensiun jadi detektif dadakan. 🎬
+            </div>
+        </div>
+
+        <!-- Kontrol Tombol Next / Sandi -->
+        <div class="control-panel" id="controlPanel">
+            <p id="instructionText">Masukkan Sandi HP untuk Membuka Part 1 (Petunjuk: 180825)</p>
+            <input type="password" id="userPin" class="input-box" maxlength="6" placeholder="______">
+            <br>
+            <button class="btn-action" id="actionBtn" onclick="nextStep()">BUKA KUNCI</button>
+        </div>
+
+        <div class="progress-indicator" id="progressText">Bagian: 1 dari 8</div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function nextStep() {
+            const pin = document.getElementById('userPin').value;
+            const instruction = document.getElementById('instructionText');
+            const inputField = document.getElementById('userPin');
+            const btn = document.getElementById('actionBtn');
+            const progress = document.getElementById('progressText');
+            const status = document.getElementById('systemStatus');
+
+            if (currentStep === 1) {
+                if (pin === '180825') {
+                    document.getElementById('part1').classList.remove('active');
+                    document.getElementById('part2').classList.add('active');
+                    currentStep = 2;
+                    instruction.innerText = "Lanjutkan Membaca Cerita (Klik Tombol Lanjut)";
+                    inputField.style.display = 'none';
+                    btn.innerText = "LANJUT KE PART 3";
+                    progress.innerText = "Bagian: 2 dari 8";
+                    status.innerText = "● SYSTEM: WARNING GPS";
+                } else {
+                    alert('Sandi Salah! Gunakan: 180825');
+                }
+            } else if (currentStep >= 2 && currentStep < 8) {
+                document.getElementById(`part${currentStep}`).classList.remove('active');
+                currentStep++;
+                document.getElementById(`part${currentStep}`).classList.add('active');
+                progress.innerText = `Bagian: ${currentStep} dari 8`;
+
+                if (currentStep === 3) status.innerText = "● SYSTEM: TRACKING ACTIVE";
+                if (currentStep === 5) status.innerText = "● SYSTEM: AUDIO DECRYPTED";
+                if (currentStep === 7) status.innerText = "● SYSTEM: POLICE RAID";
+                if (currentStep === 8) {
+                    status.innerText = "● SYSTEM: CASE CLOSED (TWIST REVEALED)";
+                    btn.innerText = "SELESAI (TAMAT)";
+                }
+            } else if (currentStep === 8) {
+                alert("Cerita AU 'The Cloud Heritage' telah selesai sepenuhnya! Terima kasih sudah membaca.");
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
